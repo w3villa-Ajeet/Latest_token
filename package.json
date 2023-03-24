@@ -1,0 +1,39 @@
+{
+  "name": "blockchain-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx hardhat compile",
+    "deploy-dev": "npx hardhat deploy",
+    "deploy-test": "npx hardhat deploy --network sepolia"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chainlink/contracts": "^0.6.1",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/contracts": "^4.8.2",
+    "@uniswap/swap-router-contracts": "^1.3.0",
+    "chai": "^4.3.7",
+    "cryptr": "^6.2.0",
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.13.0",
+    "hardhat-contract-sizer": "^2.8.0",
+    "hardhat-deploy": "^0.11.25",
+    "hardhat-deploy-ethers": "^0.3.0-beta.13",
+    "hardhat-gas-reporter": "^1.0.9",
+    "npm-check-updates": "^16.7.12",
+    "prettier": "^2.8.4",
+    "prettier-plugin-solidity": "^1.1.3",
+    "solidity-coverage": "^0.8.2",
+    "web3": "^1.8.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2"
+  }
+}
