@@ -5,7 +5,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments;
     const { owner } = await getNamedAccounts();
     const args = [];
-    const token = await deploy("LockToken", {
+    const token = await deploy("LockTokan", {
         from: owner,
         args,
         log: true,
@@ -14,9 +14,9 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("verifying contract On chain wait a minute...")
 
-        await verify('contracts/LockToken.sol:LockToken',token.address, args)
+        await verify('contracts/LockTokan.sol:LockTokan',token.address, args)
     }
     log("************************ Script Ended *************************")
 }
 
-module.exports.tags = ["all", "LockToken"]
+module.exports.tags = ["all", "LockTokan"]

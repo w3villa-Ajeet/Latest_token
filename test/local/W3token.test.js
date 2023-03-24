@@ -49,35 +49,27 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
             await expect( w3Token.transfer(acc_1, amount, { from: owner })).to.be.revertedWith("ERC20: transfer amount exceeds balance")
         });
 
-        // it("should allow transferFrom", async () => {
-        //     const amount = ethers.BigNumber.from("100000000000000000000");
-        //     console.log('amount',amount)
-        //     console.log('acc_1',acc_1)
-        //     console.log('acc_2',acc_2)
-           
-        //     // Transfaring amount to acc1
-        //     let tx=await w3Token.transfer(acc_1, amount, { from: owner });
-        //     console.log('tx',tx)
-        //     let tx2=await w3Token.connect(acc_1)
-        //     // .transfer(acc_2, amount);
-        //     console.log('tx2',tx2)
-        //     const tx3= await w3Token.transfer(acc_2, amount, { from: acc_1 }) 
-        //     console.log('tx3',tx3)
-        // //    let tx1= await w3Token.approve(acc_2, amount, { from: acc_1 });
-        // //    console.log('tx1',tx1)
-        // // let tx=await w3Token.connect(acc_2)
+        it("should allow transferFrom", async () => {
+            const amount = ethers.BigNumber.from("100000000000000000000");
+            // Transfaring amount to acc1
+            await w3Token.transfer(acc_1, amount, { from: owner });
+            let signer= await ethers.getSigner(acc_1);
+            await w3Token.connect(signer).transfer(acc_2, amount) 
+            const balance = await w3Token.balanceOf(acc_2);
+            expect(balance).to.be.equal(amount);
+        });
 
-        // //     await w3Token.transferFrom(acc_1, acc_2, amount, { from: acc_2 });
-        //     const balance = await w3Token.balanceOf(acc_2);
-        //     expect(1).to.be.equal(1);
-        // });
+        it("should not allow transferFrom more than approved amount", async () => {
+            const amount = ethers.BigNumber.from("100000000000000000000");
+            let signer= await ethers.getSigner(acc_1);
+            await w3Token.connect(signer).approve(acc_2, amount);
+            signer= await ethers.getSigner(acc_2)
+           const nwAmount= ethers.BigNumber.from("10000000000000000000")
 
-        // it("should not allow transferFrom more than approved amount", async () => {
-        //     const amount = ethers.BigNumber.from("100000000000000000000");
-        //     await w3Token.approve(acc_2, amount, { from: acc_1 });
-        //     await expect(w3Token.transferFrom(acc_1, acc_2, amount.muln(2), { from: acc_2 }))
-        //         .to.be.rejectedWith(Error, "ERC20: transfer amount exceeds allowance");
-        // });
+           console.log((await w3Token.connect(signer).balanceOf(acc_2)).toString())
+            await expect(w3Token.connect(signer).transferFrom(acc_1, acc_2, nwAmount))
+                .to.be.rejectedWith(Error, "ERC20: transfer amount exceeds allowance");
+        });
     });
 
 })
