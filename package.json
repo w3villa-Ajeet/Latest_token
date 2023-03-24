@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-local": "npx hardhat test",
     "compile": "npx hardhat compile",
     "deploy-dev": "npx hardhat deploy",
     "deploy-test": "npx hardhat deploy --network sepolia"

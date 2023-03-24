@@ -20,4 +20,4 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     log("************************ Script Ended *************************")
 }
 
-module.exports.tags = ["all", "WToken"]
+module.exports.tags = ["all", "W3Token"]

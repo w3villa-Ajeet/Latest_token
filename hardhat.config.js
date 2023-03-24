@@ -47,6 +47,8 @@ module.exports = {
   },
   namedAccounts: {
     owner: 0,
+    acc_1:1,
+    acc_2:2,
   },
   mocha: {
     timeout: 80000000 //200 sec
