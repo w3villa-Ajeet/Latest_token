@@ -1,29 +1,33 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
-contract LockToken {
-    mapping (address => uint256) public balances;
-    mapping (address => uint256) public lockTimes;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-    function transfer(address _to, uint256 _value) public {
-        require(balances[msg.sender] >= _value, "Insufficient balance.");
-        balances[msg.sender] -= _value;
-        balances[_to] += _value;
-        lockTimes[_to] = block.timestamp + 7 days; // Lock tokens for 7 days
+contract LockTokan is ERC20 {
+    struct Lock {
+        uint256 amount;
+        uint256 unlockTime;
     }
 
-    function balanceOf(address _owner) public view returns (uint256 balance) {
-        return balances[_owner];
+    mapping(address => Lock) private locks;
+    address owner;
+
+     constructor() ERC20("LockToken", "Loken") {
+        owner=msg.sender;
+        _mint(msg.sender, 1000000 * (10 ** uint256(18)));
+    }
+    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+    if(msg.sender!=owner)
+    {
+        require(unlockTime(msg.sender) <= block.timestamp, "LockableToken: sender tokens are locked");
+    }
+        _transfer(_msgSender(), recipient, amount);
+        locks[recipient] = Lock(amount, block.timestamp + 7 days);
+        return true;
     }
 
-    function canWithdraw(address _owner) public view returns (bool) {
-        return block.timestamp >= lockTimes[_owner];
-    }
-
-    function withdraw() public {
-        require(canWithdraw(msg.sender), "Tokens are still locked.");
-        uint256 amount = balances[msg.sender];
-        balances[msg.sender] = 0;
-        payable(msg.sender).transfer(amount);
+    function unlockTime(address account) public view returns (uint256) {
+        return locks[account].unlockTime;
     }
 }

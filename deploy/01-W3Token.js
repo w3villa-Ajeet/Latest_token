@@ -15,7 +15,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         log("verifying contract On chain wait a minute...")
 
         log('token.address',token.address)
-        await verify('contracts/W3Token.sol:WToken',token.address, args)
+        await verify('contracts/W3Token.sol:W3Token',token.address, args)
     }
     log("************************ Script Ended *************************")
 }
