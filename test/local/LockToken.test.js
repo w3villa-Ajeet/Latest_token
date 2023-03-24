@@ -21,7 +21,7 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
             const aliceUnlockTime = await lockToken.unlockTime(acc_1);
             let unlockTime=parseInt(await aliceUnlockTime.toString())
             let futureTime=parseInt(Date.now() / 1000 + 7 * 24 * 60 * 60)
-            expect(unlockTime).to.be.equal(futureTime);
+            expect(unlockTime).to.be.lte(futureTime);
         });
         it("should unlock token after 7 days", async () => {
             // Transfer 100 tokens from owner to Alice

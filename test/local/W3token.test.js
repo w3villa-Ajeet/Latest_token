@@ -60,15 +60,13 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
         });
 
         it("should not allow transferFrom more than approved amount", async () => {
-            const amount = ethers.BigNumber.from("100000000000000000000");
+            const amount = ethers.BigNumber.from("1000");
             let signer= await ethers.getSigner(acc_1);
             await w3Token.connect(signer).approve(acc_2, amount);
             signer= await ethers.getSigner(acc_2)
-           const nwAmount= ethers.BigNumber.from("10000000000000000000")
-
-           console.log((await w3Token.connect(signer).balanceOf(acc_2)).toString())
+           const nwAmount= ethers.BigNumber.from("1005")
             await expect(w3Token.connect(signer).transferFrom(acc_1, acc_2, nwAmount))
-                .to.be.rejectedWith(Error, "ERC20: transfer amount exceeds allowance");
+                .to.be.rejectedWith(Error, "ERC20: insufficient allowance");
         });
     });
 
