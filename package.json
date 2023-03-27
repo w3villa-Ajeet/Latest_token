@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-local": "npx hardhat test",
+    "test": "npx hardhat test --network sepolia",
     "compile": "npx hardhat compile",
     "deploy-dev": "npx hardhat deploy",
     "deploy-test": "npx hardhat deploy --network sepolia"
@@ -22,6 +23,7 @@
     "chai": "^4.3.7",
     "cryptr": "^6.2.0",
     "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
     "hardhat": "^2.13.0",
     "hardhat-contract-sizer": "^2.8.0",
     "hardhat-deploy": "^0.11.25",

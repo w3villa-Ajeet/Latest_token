@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract LockTokan is ERC20 {
+contract LockToken is ERC20 {
     struct Lock {
         uint256 amount;
         uint256 unlockTime;

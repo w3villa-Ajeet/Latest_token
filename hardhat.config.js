@@ -6,6 +6,8 @@ require("hardhat-deploy")
 require("hardhat-deploy-ethers")
 require("hardhat-gas-reporter");
 require("hardhat-contract-sizer");
+const {generateTestAccounts}=require('./test.helper')
+let testingAccounts=generateTestAccounts(2)
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
 const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -46,7 +48,7 @@ module.exports = {
       chainId: 11155111,
       blockconfirmations: 10,
       url: SEPOLIA_RPC_URL,
-      accounts: [PRIVATE_KEY]
+      accounts: [PRIVATE_KEY,...testingAccounts]
     }
   },
   etherscan: {
