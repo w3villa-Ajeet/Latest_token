@@ -1,17 +1,17 @@
 const { assert, expect } = require("chai")
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
-developmentChains.includes(network.name) ? describe.skip : describe("LockToken", async () => {
+developmentChains.includes(network.name) ? describe.skip : describe("TokenLocker", async () => {
     let lockToken, owner,acc_1,acc_2
     beforeEach(async () => {
         accounts = await getNamedAccounts()
         owner=accounts.owner,
         acc_1=accounts.acc_1
         acc_2=accounts.acc_2
-        lockToken = await ethers.getContract("LockToken", owner)
+        lockToken = await ethers.getContract("TokenLocker", owner)
     })
 
-    describe("LockToken", async() => {
+    describe("TokenLocker", async() => {
         it("should be send locktime similar", async () => {
             // Transfer 100 tokens from owner to Alice
             const amount = ethers.BigNumber.from("100");

@@ -4,8 +4,9 @@ const { verify } = require("../utills/verify");
 module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments;
     const { owner } = await getNamedAccounts();
-    const args = [];
-    const token = await deploy("LockToken", {
+    const w3Token = await ethers.getContract("WToken", owner)
+    const args = [7];
+    const token = await deploy("TokenLocker", {
         from: owner,
         args,
         log: true,
@@ -14,9 +15,9 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("verifying contract On chain wait a minute...")
 
-        await verify('contracts/LockToken.sol:LockToken',token.address, args)
+        await verify('contracts/TokenLocker.sol:TokenLocker',token.address, args)
     }
     log("************************ Script Ended *************************")
 }
 
-module.exports.tags = ["all", "LockToken"]
+module.exports.tags = ["all", "TokenLocker"]

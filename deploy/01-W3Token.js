@@ -5,7 +5,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments;
     const { owner } = await getNamedAccounts();
     const args = [];
-    const token = await deploy("W3Token", {
+    const token = await deploy("WToken", {
         from: owner,
         args,
         log: true,
@@ -15,9 +15,9 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         log("verifying contract On chain wait a minute...")
 
         log('token.address',token.address)
-        await verify('contracts/W3Token.sol:W3Token',token.address, args)
+        await verify('contracts/WToken.sol:WToken',token.address, args)
     }
     log("************************ Script Ended *************************")
 }
 
-module.exports.tags = ["all", "W3Token"]
+module.exports.tags = ["all", "WToken"]

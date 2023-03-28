@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "hardhat/console.sol";
 
 
-contract W3Token is ERC20 ,Ownable,ReentrancyGuard{
+contract WToken is ERC20 ,Ownable,ReentrancyGuard{
     constructor() ERC20("w3Token", "W3") {
         _mint(msg.sender, 1000000 * (10 ** uint256(18)));
     }

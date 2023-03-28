@@ -1,7 +1,7 @@
 const { assert, expect } = require("chai")
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
-developmentChains.includes(network.name) ? describe.skip : describe("W3Token", async () => {
+developmentChains.includes(network.name) ? describe.skip : describe("WToken", async () => {
     let w3Token, owner,acc_1,acc_2
     const chainId = network.config.chainId
     beforeEach(async () => {
@@ -9,12 +9,12 @@ developmentChains.includes(network.name) ? describe.skip : describe("W3Token", a
         owner=accounts.owner,
         acc_1=accounts.acc_1
         acc_2=accounts.acc_2
-        // await deployments.fixture(["W3Token"])
-        w3Token = await ethers.getContract("W3Token", owner)
+        // await deployments.fixture(["WToken"])
+        w3Token = await ethers.getContract("WToken", owner)
         console.log('w3Token found on address',w3Token.address)
     })
 
-    describe("W3Token", () => {
+    describe("WToken", () => {
         it("should have correct name and symbol", async () => {
             const name = await w3Token.name();
             const symbol = await w3Token.symbol();

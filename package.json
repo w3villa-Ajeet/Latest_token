@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-local": "npx hardhat test",
+    "test-dev": "npx hardhat test",
     "test": "npx hardhat test --network sepolia",
     "compile": "npx hardhat compile",
     "deploy-dev": "npx hardhat deploy",
