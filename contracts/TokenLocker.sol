@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Wrapper.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
-import "./W3Token.sol";
+import "./WToken.sol";
 contract TokenLocker is WToken{
     // Events 
     event TokensLocked(uint256 amount, uint256 releaseTime,address beneficiary);
